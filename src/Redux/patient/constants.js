@@ -1,0 +1,5 @@
+export const GET_ALL_PATIENTS = "GET_ALL_PATIENTS";
+export const GET_PATIENT_BY_ID = "GET_PATIENT_BY_ID";
+export const DELETE_PATIENT = "DELETE_PATIENT_BY_ID";
+export const EDIT_PATIENT = " EDIT_PATIENT_BY_ID ";
+export const ADD_PATIENT = "ADD_PATIENT";

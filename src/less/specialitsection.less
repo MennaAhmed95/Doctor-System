@@ -1,0 +1,68 @@
+.specialities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .specTitle {
+    font-size: larger;
+    padding: 0.5%;
+    margin-top: 1%;
+    color: @primary-darkcyan;
+  }
+  img {
+    width: 20%;
+    height: 0.45rem;
+  }
+  .text1 {
+    width: 38%;
+    padding: 0.5%;
+    text-align: center;
+  }
+  .specialistContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 80%;
+    .item {
+      flex: 1;
+      max-width: 15rem;
+      height: 13rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0.5%;
+      padding: 0.5%;
+
+      .circle {
+        border: 1px solid whitesmoke;
+        box-shadow: 2px 2px 13px rgba(0, 0, 0, 0.1);
+        background-image: url("../imgs/1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 5rem;
+        border-radius: 50%;
+        width: 10rem;
+        height: 10rem;
+      }
+      h3 {
+        color: darkslategray;
+        margin: 1%;
+      }
+    }
+  }
+}
+
+// .item {
+//     flex: 1;
+//     .sp {
+//       display: inline;
+//     }
+//     p.inset {
+//       border-style: inset;
+//     }
+//     p.outset {
+//       border-style: outset;
+//     }
+//   }

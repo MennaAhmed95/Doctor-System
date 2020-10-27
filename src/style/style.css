@@ -1,0 +1,412 @@
+/* Reset CSS begin */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 2;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+/* Reset CSS end */
+p,
+ul li,
+ol li {
+  font-size: large;
+  line-height: 25px;
+}
+ul li,
+ol li {
+  margin-bottom: 10px;
+}
+/* Helper Classes end */
+* {
+  box-sizing: border-box;
+  outline: 0;
+}
+.header {
+  display: flex;
+  height: 4rem;
+  width: 100%;
+  background-color: #ecf5fa;
+  margin-bottom: 5%;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.header .logo {
+  width: 10rem;
+  padding: 5% 0 0 0;
+  align-items: center;
+}
+.header .menuHeader {
+  align-items: center;
+}
+.header .menuHeader a {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #0a69a5;
+}
+.header .menuHeader a:hover {
+  color: #f68d4b;
+  transition: 1.5s;
+}
+.landpage {
+  display: block;
+}
+.landpage img {
+  margin-top: 4%;
+  width: 100%;
+  height: 35rem;
+}
+.footer {
+  height: 4rem;
+  width: 100%;
+  background-color: #ecf5fa;
+  color: #0a69a5;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+.footer p {
+  padding-top: 1.2%;
+}
+.doctors {
+  margin-top: 5%;
+  display: block;
+  width: 100%;
+}
+.doctors .text1 {
+  text-align: center;
+  padding: 0.5%;
+  margin-top: 1%;
+}
+.doctors .docsTitle {
+  font-size: larger;
+  text-align: center;
+  padding: 0.5%;
+  color: #0a69a5;
+}
+.doctors .cardsContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+}
+.doctors .cardsContainer .card {
+  background-color: #f4f4f4;
+  flex: 1;
+  max-width: 16rem;
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5%;
+  margin-bottom: 4%;
+  line-height: 1.5;
+}
+.doctors .cardsContainer .card img {
+  width: 16rem;
+  height: 11rem;
+  margin-bottom: 4%;
+}
+.doctors .cardsContainer .card h2 {
+  font-size: medium;
+}
+.doctors .cardsContainer .card h5 {
+  font-size: small;
+  font-weight: 200;
+  color: #004977;
+}
+.doctors .doctor {
+  background-color: #f4f4f4;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.doctors .doctor .text2 {
+  width: 60%;
+  padding: 4%;
+  text-align: left;
+  line-height: 2rem;
+}
+.doctors .doctor .text2 div {
+  padding: 2%;
+  font-size: medium;
+}
+.doctors .doctor .text2 h2 {
+  font-size: large;
+  color: #0a69a5;
+}
+.doctors .doctor .text2 h1 {
+  padding-left: 2%;
+  padding-bottom: 1%;
+  color: #0a69a5;
+}
+.doctors .doctor .text2 p {
+  line-height: 1.5;
+}
+.doctors .doctor .image {
+  overflow: hidden;
+}
+.doctors .doctor .image img {
+  width: 70%;
+  height: 20rem;
+  padding-left: 2%;
+}
+.specialities {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.specialities .specTitle {
+  font-size: larger;
+  padding: 0.5%;
+  margin-top: 1%;
+  color: #0a69a5;
+}
+.specialities img {
+  width: 20%;
+  height: 0.45rem;
+}
+.specialities .text1 {
+  width: 38%;
+  padding: 0.5%;
+  text-align: center;
+}
+.specialities .specialistContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  width: 80%;
+  margin: 3%;
+}
+.specialities .specialistContainer .item {
+  flex: 1;
+  max-width: 15rem;
+  height: 13rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5%;
+  padding: 0.5%;
+}
+.specialities .specialistContainer .item .circle {
+  border: 1px solid whitesmoke;
+  box-shadow: 2px 2px 13px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+}
+.specialities .specialistContainer .item .circle img {
+  width: 8rem;
+  height: 8rem;
+  margin: 1rem;
+  padding: 1.2rem;
+}
+.specialities .specialistContainer .item h3 {
+  color: darkslategray;
+  margin: 1%;
+}
+
+/* From App */
+/* Start login */
+.login-form {
+  max-width: 300px;
+}
+.login-form-forgot {
+  float: right;
+}
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-form-button {
+  width: 100%;
+}
+/*End login */
+
+/* .containerF{
+width: 80%;
+margin: 1%;
+margin-left: 20%;
+align-items: center;
+} */
+.site-layout-content {
+display: flex;
+justify-content: center;
+padding: 1rem;
+/* background-color:#54adce; */
+/* background-color:papayawhip; */
+background-image: url("/assets/images/medical.jpg");
+background-size: cover;
+
+}
+.mystyle
+{min-width: 40%;
+  margin:12% 0 19% 0;
+  padding:  2rem 2rem 1rem 2rem;
+  background-color: #fff;
+  border:1px solid #f0f0f0;
+   border-radius: 0.2rem; 
+  box-shadow: 0 3px 6px rgba(79,43,121,.37); 
+  /* #dcdcdc */}
+
+.mf{
+margin-left:1rem ;
+}
+
+/* start table style */
+.myIcon{
+margin: 1rem;
+}
+.ant-table-tbody > tr > td{
+text-align: center;
+border-bottom: 1px solid #71add3;
+
+}
+.ant-table-thead > tr > th{
+text-align: center;
+background:#ecf5fa;
+    border-bottom: 1px solid #71add3;
+}
+.ant-pagination-item-active a{
+    color:#71add3;
+}
+::selection{
+    color: #71add3;
+}
+.ant-pagination-item-active{
+    border-color: #71add3;
+}
+.ant-spin-container{
+  margin-top: 5%;
+}
+/* end table style */
+
+/* End App */
+/* #0a69a5 */

@@ -1,0 +1,62 @@
+{
+  "patient": [
+    {
+      "_id": 1,
+      "name": "cvcv",
+      "gender": "male",
+      "age": 20,
+      "diagnosis": "bla bla bla",
+      "appointment": 1,
+      "drName": "bla"
+    },
+    {
+      "_id": 2,
+      "name": "vbvb",
+      "gender": "female",
+      "age": 22,
+      "diagnosis": "bla bla bla",
+      "appointment": 2,
+      "history": "blla"
+    },
+    {
+      "_id": 3,
+      "name": "vbvb",
+      "gender": "male",
+      "age": 30,
+      "diagnosis": "bla bla bla",
+      "appointment": 3,
+      "history": "bllla"
+    }
+  ],
+  "secretary": [
+    {
+      "SId": 1,
+      "name": "aaa"
+    },
+    {
+      "SId": 2,
+      "name": "bbb"
+    },
+    {
+      "SId": 3,
+      "name": "ccc"
+    }
+  ],
+  "doctors": [
+    {
+      "DId": 1,
+      "name": "zzz",
+      "_id": 1
+    },
+    {
+      "DId": 2,
+      "name": "xxx",
+      "_id": 2
+    },
+    {
+      "DId": 3,
+      "name": "yyy",
+      "_id": 3
+    }
+  ]
+}

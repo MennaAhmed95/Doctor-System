@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  height: 4rem;
+  width: 100%;
+  background-color: @primary-aliceblue;
+  margin-bottom: 5%;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  .logo {
+    width: 10rem;
+    padding: 5% 0 0 0;
+    align-items: center;
+  }
+  .menuHeader {
+    a {
+      text-decoration: none;
+      padding: 0 10px;
+      color: @primary-darkcyan;
+      &:hover {
+        // color:#09e5ab ;
+        color: #f68d4b;
+        transition: 1.5s;
+      }
+    }
+    // padding-right: 20%;
+    align-items: center;
+  }
+}
