@@ -29,8 +29,9 @@ export const getPatientByIdRes = (patient) => {
   };
 };
 export const getPatientById = (id) => {
+  console.log("id action", id);
   return async (dispatch) => {
-    const patient = await getPatientById(id);
+    const patient = await patientDB.getPatientById(id);
     dispatch(getPatientByIdRes(patient));
   };
 };
@@ -41,9 +42,10 @@ export const addPatientRes = (patient) => {
     patient,
   };
 };
-export const addPatient = () => {
+export const addPatient = (patientdata) => {
+  console.log(patientdata, "patientt in action");
   return async (dispatch) => {
-    const patient = await patientDB.addPatient();
+    const patient = await patientDB.addPatient(patientdata);
     dispatch(addPatientRes(patient));
   };
 };

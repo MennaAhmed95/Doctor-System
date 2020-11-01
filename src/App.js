@@ -10,6 +10,8 @@ import Login from "./components/LoginForm/index";
 import Register from "./components/RegisterForm/index";
 import PatientTable from "./components/PatientTable/index";
 import { connect } from "react-redux";
+import PatientForm from "./components/PatientForm/index";
+import { getAllUsers } from "./Redux/user/actions";
 import {
   getAllPatients,
   getPatientById,
@@ -30,19 +32,20 @@ class App extends Component {
         drName: "",
       },
     ],
+    user: [{ userName: "", email: "", roleId: { id: "", name: "" } }],
   };
   async componentDidMount() {
     await this.props.getAllPatients();
-    const patient = this.props.patient;
-    this.setState({ patient });
-    console.log(patient, "from app");
+    await this.props.getAllUsers();
+    const user = this.props.users;
+    this.setState({ user });
+    console.log(user, "from app+");
   }
 
   render() {
     return (
       <>
         <Header />
-        {/* <PatientTable patient={this.state.patient} /> */}
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/home" component={HomePage} />
@@ -50,10 +53,16 @@ class App extends Component {
           <Route path="/specialties-sec" component={SpecialtiesSec} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/patientForm" component={PatientForm} />
+          <Route
+            path="/patientForm/:id"
+            component={PatientForm}
+            // render={(props) => <PatientForm {...props} />}
+          />
           <Route
             path="/patientTable"
             render={(props) => (
-              <PatientTable patient={this.state.patient} {...props} />
+              <PatientTable patient={this.props.patient} {...props} />
             )}
           />
           <Route path="/error-page" component={ErrorPage} />
@@ -63,12 +72,15 @@ class App extends Component {
     );
   }
 }
-// export default App;
 
 const mapStateToProps = (state) => {
-  console.log(state.user, "state");
+  console.log(state, "state");
+  console.log(state.patient.patientsList, "p");
+  console.log(state.user.users, "u");
+
   return {
     user: state.user.user,
+    users: state.user.users,
     patient: state.patient.patientsList,
   };
 };
@@ -77,23 +89,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllPatients: () => dispatch(getAllPatients()),
     getPatientById: (id) => dispatch(getPatientById(id)),
-    addPatient: () => dispatch(addPatient()),
+    addPatient: (patient) => dispatch(addPatient(patient)),
     editPatient: (id, patient) => dispatch(editPatient(id, patient)),
     deletePatient: (id) => dispatch(deletePatient(id)),
+    getAllUsers: () => dispatch(getAllUsers()),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-// component={PatientTable}
-{
-  /* <Header />
-          <LandPage />
-          <PatientTable patients={this.state.patients} />
-          <Login />
-          <Register />
-          <PatientForm />
-          <DoctorSec />
-          <SpecialtiesSec />
-          <Footer /> */
-}

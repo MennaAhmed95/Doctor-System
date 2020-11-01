@@ -1,23 +1,39 @@
 import React, { Component } from "react";
 import { Table } from "antd";
-import { useEffect } from "react";
-// import { connect } from "react-redux";
-// import {
-//   getAllPatients,
-//   getPatientById,
-//   editPatient,
-//   addPatient,
-//   deletePatient,
-// } from "../../Redux/patient/actions";
-
-// import { GetAllPateints } from "../../services/patients";
+import { useEffect, useState } from "react";
+import { Button, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { deletePatient, getPatientById } from "./../../Redux/patient/actions";
+import { editPatient } from "../../Redux/patient/api";
+const { Search } = Input;
 
 const PatientTable = (props) => {
+  const { patient } = props;
+  const dispatch = useDispatch();
+  const [users, setUsers] = useState({ roleId: { name: "" } });
+  const [patientt, setPatient] = useState({});
+  const {
+    roleId: { name = "" },
+  } = users;
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user, "user");
-  });
-  console.log(props, "opppps");
+    {
+      user && setUsers(user);
+    }
+  }, []);
+  useEffect(() => {
+    setPatient(patientt);
+  }, [patientt]);
+  const onSearch = (value) => console.log(value);
+  const handleDelete = (id) => {
+    dispatch(deletePatient(id));
+    console.log("deleted", id);
+  };
+  const handleEdit = (id) => {
+    dispatch(getPatientById(id));
+    props.history.push(`/patientForm/${id}`);
+    console.log("edited", id);
+  };
   const columns = [
     {
       title: "PId",
@@ -58,29 +74,59 @@ const PatientTable = (props) => {
       title: "",
       dataIndex: "",
       key: "",
-      render: () => {
+      render: (action, record) => {
         return (
-          <div>
-            <span>
-              <i class="far fa-calendar-plus"></i>
-            </span>
-            <span>
-              <i class="far fa-edit myIcon"></i>
-            </span>
-            <span>
-              <i class="far fa-trash-alt"></i>
-            </span>
-          </div>
+          <>
+            {name === "Secretary" && (
+              <div>
+                <button
+                  onClick={() => handleEdit(record.id)}
+                  className="mySpan"
+                >
+                  <i className="far fa-edit "></i>
+                </button>
+                <button
+                  onClick={() => handleDelete(record.id)}
+                  className="mySpan"
+                >
+                  <i className="far fa-trash-alt"></i>
+                </button>
+              </div>
+            )}
+          </>
         );
       },
     },
   ];
-  const dataSource = props.patient;
+
+  const dataSource = patient;
   console.log(dataSource, "daaaaaaaaata");
   return (
-    <div style={{ margin: "1% 8%" }}>
-      <Table dataSource={dataSource} columns={columns} />
-    </div>
+    <>
+      {name === "Secretary" ? (
+        <Button type="primary" className="tableItem" href="patientForm">
+          Add Appointment
+          {console.log(name)}
+        </Button>
+      ) : (
+        <div className="tableItem">
+          {console.log(name)}
+
+          <Search
+            placeholder="Search"
+            onSearch={onSearch}
+            enterButton={<i class="fas fa-search"></i>}
+          />
+        </div>
+      )}
+      <div style={{ margin: "1% 8%" }}>
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          pagination={{ defaultPageSize: ["7"] }}
+        />
+      </div>
+    </>
   );
 };
 

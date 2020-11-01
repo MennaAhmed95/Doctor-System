@@ -13,15 +13,17 @@ export default (state = initialState, action) => {
         patientsList: action.patientsList,
       };
     case actionTypes.GET_PATIENT_BY_ID:
+      console.log(action.patient, "patient red");
       return {
         ...state,
         patient: action.patient,
       };
     case actionTypes.ADD_PATIENT:
-      let patientList = [...state.patientList, action.patient];
+      let patientsList = [...state.patientsList, action.patient];
+      console.log(patientsList, "patient reducer");
       return {
         ...state,
-        patientList,
+        patientsList,
       };
     case actionTypes.EDIT_PATIENT:
       return {
@@ -29,9 +31,12 @@ export default (state = initialState, action) => {
         editedPatient: action.patient,
       };
     case actionTypes.DELETE_PATIENT:
+      const patientList = state.patientsList.filter(
+        (item) => item.id !== action.patient.id
+      );
       return {
         ...state,
-        deletedPatient: action.patient,
+        patientsList: patientList,
       };
     default:
       return state;

@@ -381,9 +381,9 @@ margin-left:1rem ;
 }
 
 /* start table style */
-.myIcon{
+/* .myIcon{
 margin: 1rem;
-}
+} */
 .ant-table-tbody > tr > td{
 text-align: center;
 border-bottom: 1px solid #71add3;
@@ -404,9 +404,28 @@ background:#ecf5fa;
     border-color: #71add3;
 }
 .ant-spin-container{
-  margin-top: 5%;
+  margin-top: 1%;
 }
 /* end table style */
-
+/* register form */
+/* @media (min-width: 576px) */
+.ant-col-sm-offset-8 {
+margin: 0.1rem;
+}
+.ant-form-vertical .ant-form-item{
+  flex-direction: row;
+}
+.tableItem{
+    margin-top: 7%;
+    margin-left: 10%;
+    max-width: 30%;
+}
+.mySpan{
+  cursor: pointer;
+  margin: 5%;
+color:dodgerblue;
+border:none;
+background-color:#f4f4f4;
+}
 /* End App */
 /* #0a69a5 */

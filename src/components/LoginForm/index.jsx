@@ -14,6 +14,7 @@ class Login extends Component {
   };
 
   onFinish = async (values) => {
+    localStorage.clear();
     console.log("Received values of form: ", values);
     this.setState({ user: values });
     let user = { ...this.state.user };

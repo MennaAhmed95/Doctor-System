@@ -94,3 +94,16 @@ export const getUserById = (id) => {
     dispatch(getUserByIdRes(userById));
   };
 };
+
+const getAllUsersRes = (users) => {
+  return {
+    type: GET_ALL_USERS,
+    users,
+  };
+};
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    const users = await userDB.getAllUsers();
+    dispatch(getAllUsersRes(users));
+  };
+};

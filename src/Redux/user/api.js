@@ -56,7 +56,7 @@ export const getAllUsers = async () => {
     .get(`${url}`)
     .catch((err) => console.log(err.response.data));
   if (response) {
-    console.log(response.data, "userById");
+    console.log(response.data, "users All");
     return response.data;
   }
 };

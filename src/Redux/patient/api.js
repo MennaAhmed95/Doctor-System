@@ -8,21 +8,18 @@ export const getAllPatients = async () => {
 };
 
 export const getPatientById = async (id) => {
+  console.log("api id:", id);
   const { data } = await axios.get(`${url}/${id}`);
   return data;
 };
 
-export const addPatient = async () => {
+export const addPatient = async (patient) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  const { data } = await axios.post(
-    `${url}/addPatient`,
-    {},
-    {
-      headers: {
-        authorization: token,
-      },
-    }
-  );
+  const { data } = await axios.post(`${url}/addPatient`, patient, {
+    headers: {
+      authorization: token,
+    },
+  });
   return data;
 };
 export const editPatient = async (id, patient) => {
@@ -31,6 +28,7 @@ export const editPatient = async (id, patient) => {
 };
 
 export const deletePatient = async (id) => {
-  const { data } = await axios.post(`${url}/${id}`);
+  console.log(id, "D apiiiiiiiiii");
+  const { data } = await axios.delete(`${url}/${id}`);
   return data;
 };

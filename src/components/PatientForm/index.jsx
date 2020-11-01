@@ -3,16 +3,26 @@ import { DatePicker, Form, Input, Button, Select, InputNumber } from "antd";
 import { validateMessages, layout, Option } from "./constants";
 import { connect } from "react-redux";
 import {
-  getAllPatients,
+  addPatient,
   getPatientById,
   editPatient,
-  addPatient,
-  deletePatient,
 } from "../../Redux/patient/actions";
+import { getAllUsers } from "../../Redux/user/actions";
 
 class PatientForm extends Component {
   state = {
-    patient: {
+    patient: [
+      {
+        name: "",
+        age: null,
+        gender: "",
+        appointment: "",
+        diagnosis: "",
+        drName: "",
+      },
+    ],
+    user: [{ userName: "", email: "", roleId: { id: "", name: "" } }],
+    onePatient: {
       name: "",
       age: null,
       gender: "",
@@ -21,18 +31,32 @@ class PatientForm extends Component {
       drName: "",
     },
   };
-
   async componentDidMount() {
-    const patient = await getAllPatients();
-    this.setState({ patient });
-    console.log(patient, "from formmmmmm");
+    console.log(this.props.match.params, "this.props.match.params");
+    if (this.props.match.params.id) {
+      await this.props.getPatientById(this.props.match.params.id);
+      const onePatient = this.props.onePatient;
+      this.setState({ onePatient });
+      console.log(onePatient, "onePatient");
+    } else {
+      await this.props.getAllUsers();
+      const patient = this.props.patient;
+      const user = this.props.users;
+      this.setState({ user, patient });
+      console.log(patient, "from form");
+    }
   }
-
-  onFinish = (values) => {
-    console.log(values);
+  onFinish = async (values) => {
+    const val = {
+      ...values,
+      appointment: values["appointment"].format("YYYY-MM-DD HH:mm:ss"),
+    };
+    console.log(val);
+    await this.props.addPatient(val);
+    this.props.history.replace("/patientTable");
   };
-
   onReset = () => {
+    const [form] = Form.useForm();
     form.resetFields();
   };
   onChange = (value, dateString) => {
@@ -43,22 +67,22 @@ class PatientForm extends Component {
   onOk = (value) => {
     console.log("onOk: ", value);
   };
-
   render() {
-    const { onFinish, onReset, onChange, onOk } = this;
-    const [form] = Form.useForm();
+    const { onFinish, onOk, onChange, onReset } = this;
     return (
       <div className="site-layout-content">
         <Form
-          form={form}
+          layout="vertical"
+          // form={form}
           className="mystyle"
           {...layout}
           name="nest-messages"
           onFinish={onFinish}
           validateMessages={validateMessages}
+          initialValues={this.props.onePatient}
         >
           <Form.Item
-            name={["user", "name"]}
+            name="name"
             label="Name"
             rules={[
               {
@@ -69,7 +93,7 @@ class PatientForm extends Component {
             <Input />
           </Form.Item>
           <Form.Item
-            name={["user", "age"]}
+            name="age"
             label="Age"
             rules={[
               {
@@ -91,24 +115,25 @@ class PatientForm extends Component {
               },
             ]}
           >
-            <Select placeholder="Select Your Gender" allowClear>
+            <Select placeholder="Select Your Gender">
               <Option value="male">male</Option>
               <Option value="female">female</Option>
             </Select>
           </Form.Item>
-          <Form.Item label="Date and Time">
+          <Form.Item name="appointment" label="Date and Time">
             <DatePicker
+              format="YYYY-MM-DD HH:mm:ss"
               showTime
               onChange={onChange}
               onOk={onOk}
               placeholder="Appointment"
             />
           </Form.Item>
-          <Form.Item name={["user", "diagnosis"]} label="Diagnosis">
+          <Form.Item name="diagnosis" label="Diagnosis">
             <Input.TextArea />
           </Form.Item>
           <Form.Item
-            name="doctor"
+            name="drName"
             label="Doctor Name"
             rules={[
               {
@@ -116,10 +141,16 @@ class PatientForm extends Component {
               },
             ]}
           >
-            <Select placeholder="Select Doctor" allowClear>
-              <Option value="Ahmed">Ahmed</Option>
-              <Option value="Mohamed">Mohamed</Option>
-              <Option value="Magdy">Magdy</Option>
+            <Select placeholder="Select Doctor">
+              {this.state.user.map((item) => {
+                if (item.roleId.name === "Doctor") {
+                  return (
+                    <Option key={item.id} value={item.userName}>
+                      {item.userName}
+                    </Option>
+                  );
+                }
+              })}
             </Select>
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
@@ -135,36 +166,36 @@ class PatientForm extends Component {
     );
   }
 }
+
+// export default PatientForm;
+
 const mapStateToProps = (state) => {
+  console.log(state.patient.patient, "one patient");
   return {
-    user: state.user.user,
-    patient: state.patient.patient,
+    patient: state.patient.patientsList,
+    onePatient: state.patient.patient,
+    users: state.user.users,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllPatients: () => dispatch(getAllPatients()),
+    addPatient: (patient) => dispatch(addPatient(patient)),
+    getAllUsers: () => dispatch(getAllUsers()),
     getPatientById: (id) => dispatch(getPatientById(id)),
-    addPatient: () => dispatch(addPatient()),
     editPatient: (id, patient) => dispatch(editPatient(id, patient)),
-    deletePatient: (id) => dispatch(deletePatient(id)),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 
-// export default PatientForm;
-
-// const PatientForm = () => {
-//   const [form] = Form.useForm();
 //   const onFinish = (values) => {
+//     // await this.props.addPatient(values);
 //     console.log(values);
 //   };
-
-//   const onReset = () => {
+//   function onReset() {
+//     const [form] = Form.useForm();
 //     form.resetFields();
-//   };
+//   }
 //   function onChange(value, dateString) {
 //     console.log("Selected Time: ", value);
 //     console.log("Formatted Selected Time: ", dateString);
@@ -177,7 +208,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 //   return (
 //     <div className="site-layout-content">
 //       <Form
-//         form={form}
+//         layout="vertical"
+//         // form={form}
 //         className="mystyle"
 //         {...layout}
 //         name="nest-messages"
@@ -185,7 +217,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 //         validateMessages={validateMessages}
 //       >
 //         <Form.Item
-//           name={["user", "name"]}
+//           name="name"
 //           label="Name"
 //           rules={[
 //             {
@@ -196,7 +228,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 //           <Input />
 //         </Form.Item>
 //         <Form.Item
-//           name={["user", "age"]}
+//           name="age"
 //           label="Age"
 //           rules={[
 //             {
@@ -231,7 +263,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 //             placeholder="Appointment"
 //           />
 //         </Form.Item>
-//         <Form.Item name={["user", "diagnosis"]} label="Diagnosis">
+//         <Form.Item name="diagnosis" label="Diagnosis">
 //           <Input.TextArea />
 //         </Form.Item>
 //         <Form.Item
@@ -244,9 +276,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 //           ]}
 //         >
 //           <Select placeholder="Select Doctor" allowClear>
-//             <Option value="Ahmed">Ahmed</Option>
-//             <Option value="Mohamed">Mohamed</Option>
-//             <Option value="Magdy">Magdy</Option>
+//             {users.map((item) => {
+//               if (item.roleId.name === "Doctor") {
+//                 return (
+//                   <Option key={item.id} value={item.userName}>
+//                     {item.userName}
+//                   </Option>
+//                 );
+//               }
+//             })}
 //           </Select>
 //         </Form.Item>
 //         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
@@ -261,5 +299,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(PatientForm);
 //     </div>
 //   );
 // };
-
-// export default PatientForm;

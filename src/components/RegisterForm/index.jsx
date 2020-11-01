@@ -16,6 +16,7 @@ const Register = () => {
         className="mystyle"
         onFinish={onFinish}
         scrollToFirstError
+        layout="vertical"
       >
         <Form.Item
           name="username"
